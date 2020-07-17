@@ -19,7 +19,7 @@ const queryDB = () => <T>({
   query,
   variables,
 }: QueryDB): Promise<QueryResponse<T>> =>
-  fetch("https://investments-server.herokuapp.com/query", {
+  fetch("http://localhost:3001/query", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -34,7 +34,7 @@ const mutateDB = () => <T>({
   query,
   variables,
 }: QueryDB): Promise<MutationResponse<T>> =>
-  fetch("https://investments-server.herokuapp.com/query", {
+  fetch("http://localhost:3001/query", {
     method: "POST",
     headers: {
       "content-type": "application/json",

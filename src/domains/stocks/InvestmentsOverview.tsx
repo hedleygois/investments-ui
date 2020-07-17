@@ -3,6 +3,7 @@ import { fetchAllSymbols, fetchLastStocksValues } from "../../api/StocksApi";
 import { Stock } from "../../model/Stock";
 import { CircularProgress } from "@material-ui/core";
 import { InvestmentOverviewGrid } from "./InvestmentOverviewGrid";
+import { StyledH3 } from "../../components/header/Header";
 
 export const InvestmentsOverview = () => {
   const [stocksState, setStockState] = useState<
@@ -37,7 +38,7 @@ export const InvestmentsOverview = () => {
             marginRight: 30,
           }}
         >
-          <h3>Active</h3>
+          <StyledH3>Active</StyledH3>
           <InvestmentOverviewGrid
             stocks={
               new Map(

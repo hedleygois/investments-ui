@@ -9,12 +9,11 @@ export const Toolbar = () => {
         display: "flex",
         flexDirection: "row",
         width: "10%",
-        background: "#f0f0f0",
-        marginLeft: 10,
+        background: "#BACDE8",
       }}
       data-testid="toolbar"
     >
-      <ul style={{ listStyleType: "none", padding: 0 }}>
+      <ul style={{ listStyleType: "none", padding: 0, width: "100%" }}>
         <li>
           <Link to="/">Home</Link>
         </li>
