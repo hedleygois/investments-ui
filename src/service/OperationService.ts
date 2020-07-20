@@ -64,11 +64,6 @@ export const operateFund = ({
     ? fetchFundByIdWithValue(fundId).then((idWithValue) => {
         if (idWithValue) {
           const { value } = idWithValue;
-          console.info(
-            operation,
-            OperationType.BUY.valueOf(),
-            operation === OperationType.BUY.valueOf()
-          );
           const valueToOperation =
             operation === OperationType.BUY.valueOf()
               ? value + valueToOperate

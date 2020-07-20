@@ -3,6 +3,8 @@ import { fetchAllSymbols, fetchLastStocksValues } from "../../api/StocksApi";
 import { Stock } from "../../model/Stock";
 import { CircularProgress } from "@material-ui/core";
 import { InvestmentOverviewLayout } from "./InvestmentOverviewLayout";
+import styled from "styled-components";
+import tw from "twin.macro";
 
 export const InvestmentsOverview = () => {
   const [stocksState, setStockState] = useState<
@@ -43,18 +45,24 @@ export const InvestmentsOverview = () => {
         />
       )}
       {stocks && (
-        <InvestmentOverviewLayout
-          header="Inactive"
-          stocks={
-            new Map(
-              Array.from(stocks.entries()).filter(
-                ([_, { symbol }]) => !stocksState?.get(symbol)
+        <InactiveOverviewLayoutContainer>
+          <InvestmentOverviewLayout
+            header="Inactive"
+            stocks={
+              new Map(
+                Array.from(stocks.entries()).filter(
+                  ([_, { symbol }]) => !stocksState?.get(symbol)
+                )
               )
-            )
-          }
-        />
+            }
+          />
+        </InactiveOverviewLayoutContainer>
       )}
       {!stocks && <CircularProgress />}
     </>
   );
 };
+
+const InactiveOverviewLayoutContainer = styled.div`
+  ${tw`mt-4`}
+`;

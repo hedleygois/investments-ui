@@ -28,6 +28,7 @@ const percentageSpacing = {
 module.exports = {
   theme: {
     screens: {
+      sm: "1190px",
       md: "1280px",
       lg: "1366px",
       xl: "1440px",
@@ -42,6 +43,11 @@ module.exports = {
       },
       gray: {
         1: "#F8F8F8",
+        100: "#F5F5F5",
+        200: "#D9D9D9",
+        300: "#C2C2C2",
+        400: "8A8A8A",
+        500: "#636363"
       },
       blue: {
         1: "#2576DA", // Base
@@ -66,6 +72,10 @@ module.exports = {
         "96": "24rem",
         "104": "26rem",
       },
+      width: {
+        "1/10": "10%",
+        "13/100": "13%"
+      },
       inset: (theme, { negative }) => ({
         ...theme("spacing"),
         ...percentageSpacing,
@@ -76,7 +86,7 @@ module.exports = {
         ...theme("spacing"),
         tiny: "4.375rem",
         xs: "20rem",
-        "min-screen": "980px",
+        "normal": "40rem",
         "1/10": "10%",
         "1/4": "25%",
         "1/3": "33%",

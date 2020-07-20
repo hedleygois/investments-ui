@@ -17,7 +17,7 @@ export const OperationsOverview = () => (
 );
 
 const OverviewContainer = styled.div`
-  ${tw`flex flex-column m-2`}
+  ${tw`flex flex-col m-2`}
 `;
 
 const StocksContainer = styled.div`

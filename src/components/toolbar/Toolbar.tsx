@@ -63,8 +63,9 @@ export const Toolbar = () => {
   );
 };
 
+// TODO Fix these breakpoints later
 const ToolbarContainer = styled.div`
-  ${tw`flex flex-row w-1/10 bg-blue-50`}
+  ${tw`flex flex-row lg:w-1/6 md:w-1/6 sm:w-1/4 bg-blue-50`}
 `;
 
 const List = styled.ul`

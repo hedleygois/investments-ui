@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Operation } from "../../api/OperationsApi";
 import {
-  Operation,
-} from "../../api/OperationsApi";
-import {
-  makeStyles,
   TableContainer,
   Paper,
   Table,
@@ -12,16 +9,8 @@ import {
   TableCell,
   TableBody,
 } from "@material-ui/core";
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  header: {
-    backgroundColor: "darkgray",
-    color: "white",
-  }
-});
+import tw from "twin.macro";
+import styled from "styled-components";
 
 export type OperationsTableProps = {
   fetchData: () => Promise<Operation[]>;
@@ -36,18 +25,16 @@ export const OperationsTable = ({ fetchData }: OperationsTableProps) => {
     fetchData().then(setOperations);
   }, []);
 
-  const classes = useStyles();
-
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table}>
-        <TableHead className={classes.header}>
+      <StyledTable>
+        <TableHeader>
           <TableRow>
             <TableCell>Operation Type</TableCell>
             <TableCell>Symbol</TableCell>
             <TableCell>Value</TableCell>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
           {operations?.map((operation) => (
             <TableRow key={operation.id}>
@@ -63,7 +50,15 @@ export const OperationsTable = ({ fetchData }: OperationsTableProps) => {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </StyledTable>
     </TableContainer>
   );
 };
+
+const StyledTable = styled(Table)`
+  ${tw`min-w-normal`}
+`;
+
+const TableHeader = styled(TableHead)`
+  ${tw`bg-gray-100 text-white`}
+`;

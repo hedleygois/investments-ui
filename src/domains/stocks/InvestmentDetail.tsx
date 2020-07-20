@@ -130,7 +130,7 @@ export const InvestmentDetails = () => {
 };
 
 const HeaderContainer = styled.div`
-  ${tw`flex flex-column`}
+  ${tw`flex flex-col`}
 `;
 
 const BodyContainer = styled.div`
