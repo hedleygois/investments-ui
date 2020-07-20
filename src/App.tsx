@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import { InvestmentsOverview } from "./domains/stocks/InvestmentsOverview";
+import { StocksOverview } from "./domains/stocks/StocksOverview";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import { DividendsOverview } from "./domains/dividends/DividendsOverview";
 import { FundsOverview } from "./domains/funds/FundsOverview";
 import { OperationsOverview } from "./domains/operations/OperationsOverview";
 import { Toolbar } from "./components/toolbar/Toolbar";
-import { InvestmentDetails } from "./domains/stocks/InvestmentDetail";
+import { StocksDetails } from "./domains/stocks/StocksDetail";
 import { NewStockOperation } from "./domains/operations/NewStockOperation";
 import { NewFundsOperations } from "./domains/operations/NewFundsOperation";
 import tw from "twin.macro";
@@ -24,10 +24,10 @@ function App() {
           <Toolbar />
           <MainArea>
             <Switch>
-              <Route path="/dashboard" exact component={InvestmentsOverview} />
+              <Route path="/dashboard" exact component={StocksOverview} />
               <Route
                 path="/dashboard/stock/detail/:symbol"
-                component={InvestmentDetails}
+                component={StocksDetails}
               />
               <Route path="/dividends" component={DividendsOverview} />
               <Route path="/funds" component={FundsOverview} />
@@ -45,7 +45,7 @@ function App() {
               />
               <Route path="/operations" component={OperationsOverview} />
 
-              <Route path="/" exact component={InvestmentsOverview} />
+              <Route path="/" exact component={StocksOverview} />
             </Switch>
           </MainArea>
         </Main>

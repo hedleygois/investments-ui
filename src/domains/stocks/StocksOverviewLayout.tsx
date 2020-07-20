@@ -2,10 +2,10 @@ import React from "react";
 import { Stock } from "../../model/Stock";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { InvestmentOverviewGrid } from "./InvestmentOverviewGrid";
+import { StocksOverviewGrid } from "./StocksOverviewGrid";
 import { StyledH3 } from "../../components/header/Header";
 
-type InvestmentOverviewLayoutProps = {
+type StocksOverviewLayoutProps = {
   header: string;
   stocks: Map<string, Stock>;
   active?: boolean;
@@ -21,15 +21,15 @@ const getContainer = (children: React.ReactNode) => (active?: boolean) =>
 const getBody = (header: string, stocks: Map<string, Stock>) => (
   <>
     <StyledH3>{header}</StyledH3>
-    <InvestmentOverviewGrid stocks={stocks} />
+    <StocksOverviewGrid stocks={stocks} />
   </>
 );
 
-export const InvestmentOverviewLayout = ({
+export const StocksOverviewLayout = ({
   header,
   stocks,
   active,
-}: InvestmentOverviewLayoutProps) =>
+}: StocksOverviewLayoutProps) =>
   getContainer(getBody(header, stocks))(active);
 
 const ActiveOverviewContainer = styled.div`

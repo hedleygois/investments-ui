@@ -5,11 +5,11 @@ import { useHistory } from "react-router-dom";
 import { InfoCard } from "../../components/cards/InfoCard";
 import { DataGrid } from "../../components/data-grid/DataGrid";
 
-type InvestmentOverviewGridProps = { stocks: Map<string, Stock> };
+type StocksOverviewGridProps = { stocks: Map<string, Stock> };
 
-export const InvestmentOverviewGrid = ({
+export const StocksOverviewGrid = ({
   stocks,
-}: InvestmentOverviewGridProps) => {
+}: StocksOverviewGridProps) => {
   const history = useHistory();
 
   return (

@@ -1,3 +1,5 @@
+
+//TODO Avoid using this interface here since no query returns all these fields in one go
 export interface Stock {
   symbol: string;
   open: number;

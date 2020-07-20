@@ -89,6 +89,7 @@ export const BUY_SELL_STOCK = `
   }
 `;
 
+// TODO Rename and move these things since components are using these types and components shouldn't be tied to API at all
 export type AllSymbolsResponse = {
   symbol: string;
   amount: number;

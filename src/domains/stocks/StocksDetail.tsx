@@ -12,7 +12,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { StyledH2 } from "../../components/header/Header";
 
-export const InvestmentDetails = () => {
+export const StocksDetails = () => {
   const [history, setHistory] = useState<Stock[]>([]);
   const match = useRouteMatch<{ symbol: string }>(
     "/dashboard/stock/detail/:symbol"
