@@ -4,10 +4,11 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { StocksOverviewGrid } from "./StocksOverviewGrid";
 import { StyledH3 } from "../../components/header/Header";
+import { LastStocksValuesResponse } from "../../api/StocksApi";
 
 type StocksOverviewLayoutProps = {
   header: string;
-  stocks: Map<string, Stock>;
+  stocks: Map<string, LastStocksValuesResponse>;
   active?: boolean;
 };
 

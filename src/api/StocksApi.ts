@@ -141,17 +141,16 @@ export const fetchHistory = (symbol: string): Promise<Stock[]> =>
       return [];
     });
 
-// Fetcher-ts will fix it
-type LastStocksValuesResponse = {
-  data: {
-    Stock: Stock[];
-  };
+export type LastStocksValuesResponse = {
+  symbol: string;
+  changeP: number;
+  price: number;
 };
 
 export const fetchLastStocksValues = (
   symbols: string[]
-): Promise<Map<string, Stock>> => {
-  return QueryDB<Stock[]>({
+): Promise<Map<string, LastStocksValuesResponse>> => {
+  return QueryDB<LastStocksValuesResponse[]>({
     query: QUERY_LAST_STOCK_VALUE,
     variables: {
       symbols,
@@ -161,7 +160,7 @@ export const fetchLastStocksValues = (
     .then((res) =>
       res.data.Stock.reduce(
         (map, el) => map.set(el.symbol, el),
-        new Map<string, Stock>()
+        new Map<string, LastStocksValuesResponse>()
       )
     )
     .catch((error) => {

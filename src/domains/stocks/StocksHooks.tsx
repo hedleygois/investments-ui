@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { fetchAllSymbols, fetchLastStocksValues } from "../../api/StocksApi";
-import { Stock } from "../../model/Stock";
+import { useEffect, useState } from "react";
+import { fetchAllSymbols, fetchLastStocksValues, LastStocksValuesResponse } from "../../api/StocksApi";
 
 export const useStocksState = () => {
   const [stocksState, setStockState] = useState<
     Map<string, boolean> | undefined
   >();
-  const [stocks, setStocks] = useState<Map<string, Stock> | undefined>(
+  const [stocks, setStocks] = useState<Map<string, LastStocksValuesResponse> | undefined>(
     undefined
   );
 

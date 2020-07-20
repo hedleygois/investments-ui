@@ -3,7 +3,7 @@ type QueryDB = {
   variables?: unknown;
 };
 
-type QueryResponse<T> = {
+export type QueryResponse<T> = {
   data: {
     [name: string]: T;
   };
@@ -18,8 +18,8 @@ type MutationResponse<T> = {
 const queryDB = () => <T>({
   query,
   variables,
-}: QueryDB): Promise<QueryResponse<T>> =>
-  fetch("http://localhost:3001/query", {
+}: QueryDB): Promise<QueryResponse<T>> => {
+  return fetch("http://localhost:3001/query", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -29,6 +29,7 @@ const queryDB = () => <T>({
       variables,
     }),
   }).then((res) => res.json());
+};
 
 const mutateDB = () => <T>({
   query,

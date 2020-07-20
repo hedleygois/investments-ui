@@ -1,11 +1,11 @@
-import React from "react";
 import { Grid } from "@material-ui/core";
-import { Stock } from "../../model/Stock";
+import React from "react";
 import { useHistory } from "react-router-dom";
+import { LastStocksValuesResponse } from "../../api/StocksApi";
 import { InfoCard } from "../../components/cards/InfoCard";
 import { DataGrid } from "../../components/data-grid/DataGrid";
 
-type StocksOverviewGridProps = { stocks: Map<string, Stock> };
+type StocksOverviewGridProps = { stocks: Map<string, LastStocksValuesResponse> };
 
 export const StocksOverviewGrid = ({
   stocks,
