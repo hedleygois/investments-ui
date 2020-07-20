@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { OperationType } from "../../model/OperationType";
 import { useHistory } from "react-router";
-import { Fund } from "../../model/Fund";
 import { fetchAllFunds, AllFundsResponse } from "../../api/FundsApi";
 import Paper from "@material-ui/core/Paper";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -11,8 +10,10 @@ import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
 import { operateFund } from "../../service/OperationService";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import { SuccessFailureAlert } from "../../components/alert/SuccessFalureAlert";
+import styled from "styled-components";
+import tw from "twin.macro";
+import { StyledH2 } from "../../components/header/Header";
 
 export const NewFundsOperations = () => {
   const [value, setValue] = useState(0.0);
@@ -30,8 +31,8 @@ export const NewFundsOperations = () => {
 
   return (
     <Paper>
-      <h2>New Operation</h2>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <StyledH2>New Operation</StyledH2>
+      <FundsOperationContainer>
         <div>
           <InputLabel htmlFor="operation-type">Operation Type</InputLabel>
           <Select
@@ -65,7 +66,7 @@ export const NewFundsOperations = () => {
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
           />
         </div>
-      </div>
+      </FundsOperationContainer>
       <div>
         <Button
           variant="contained"
@@ -74,7 +75,7 @@ export const NewFundsOperations = () => {
             operateFund({
               fundId: funds.find((f) => f.name === fund)?.id,
               valueToOperate: value,
-              operation
+              operation,
             })
               .then(() => setSuccess(true))
               .catch(() => setSuccess(false))
@@ -86,14 +87,14 @@ export const NewFundsOperations = () => {
           Cancel
         </Button>
       </div>
-      <Snackbar autoHideDuration={3000} open={success}>
-        <MuiAlert severity="success">Operation Saved</MuiAlert>
-      </Snackbar>
-      <Snackbar autoHideDuration={3000} open={success === false}>
-        <MuiAlert severity="error" variant="filled">
-          There was an error. Try again.
-        </MuiAlert>
-      </Snackbar>
+      <SuccessFailureAlert
+        success={success}
+        successMessage="Funds Operation Saved"
+      />
     </Paper>
   );
 };
+
+const FundsOperationContainer = styled.div`
+  ${tw`flex flex-column`}
+`;

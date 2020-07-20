@@ -1,19 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Switch, Route } from "react-router";
+import styled from "styled-components";
+import tw from "twin.macro";
 
 export const Toolbar = () => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        width: "10%",
-        background: "#BACDE8",
-      }}
-      data-testid="toolbar"
-    >
-      <ul style={{ listStyleType: "none", padding: 0, width: "100%" }}>
+    <ToolbarContainer data-testid="toolbar">
+      <List>
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -27,9 +21,9 @@ export const Toolbar = () => {
           <Route
             path="/dividends"
             component={() => (
-              <li style={{ marginLeft: 5 }}>
+              <InnerLink>
                 <Link to="/dividends/new">New</Link>
-              </li>
+              </InnerLink>
             )}
           />
         </Switch>
@@ -39,9 +33,9 @@ export const Toolbar = () => {
             <Route
               path="/funds"
               component={() => (
-                <li style={{ marginLeft: 5 }}>
+                <InnerLink>
                   <Link to="/funds/new">New</Link>
-                </li>
+                </InnerLink>
               )}
             />
           </Switch>
@@ -54,17 +48,29 @@ export const Toolbar = () => {
             path="/operations"
             component={() => (
               <>
-                <li style={{ marginLeft: 5 }}>
+                <InnerLink>
                   <Link to="/operations/stocks/new">New Stock Operation</Link>
-                </li>
-                <li style={{ marginLeft: 5 }}>
+                </InnerLink>
+                <InnerLink>
                   <Link to="/operations/funds/new">New Funds Operation</Link>
-                </li>
+                </InnerLink>
               </>
             )}
           />
         </Switch>
-      </ul>
-    </div>
+      </List>
+    </ToolbarContainer>
   );
 };
+
+const ToolbarContainer = styled.div`
+  ${tw`flex flex-row w-1/10 bg-blue-50`}
+`;
+
+const List = styled.ul`
+  ${tw`list-none p-0 w-full`}
+`;
+
+const InnerLink = styled.li`
+  ${tw`ml-1`}
+`;

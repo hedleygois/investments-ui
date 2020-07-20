@@ -9,10 +9,14 @@ import {
   Button,
   Snackbar,
 } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
+
 import { fetchAllSymbols } from "../../api/StocksApi";
 import { operateStock } from "../../service/OperationService";
 import { useHistory } from "react-router";
+import { StyledH2 } from "../../components/header/Header";
+import styled from "styled-components";
+import tw from "twin.macro";
+import { SuccessFailureAlert } from "../../components/alert/SuccessFalureAlert";
 
 export const NewStockOperation = () => {
   const [value, setValue] = useState(0.0);
@@ -33,8 +37,8 @@ export const NewStockOperation = () => {
 
   return (
     <Paper>
-      <h2>New Operation</h2>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <StyledH2>New Operation</StyledH2>
+      <FormContainer>
         <div>
           <InputLabel htmlFor="operation-type">Operation Type</InputLabel>
           <Select
@@ -77,7 +81,7 @@ export const NewStockOperation = () => {
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
           />
         </div>
-      </div>
+      </FormContainer>
       <div>
         <Button
           variant="contained"
@@ -92,16 +96,11 @@ export const NewStockOperation = () => {
           Cancel
         </Button>
       </div>
-      <Snackbar autoHideDuration={3000} open={success}>
-        <MuiAlert severity="success">
-          Operation Saved
-        </MuiAlert>
-      </Snackbar>
-      <Snackbar autoHideDuration={3000} open={success === false}>
-        <MuiAlert severity="error" variant="filled">
-          There was an error. Try again.
-        </MuiAlert>
-      </Snackbar>
+      <SuccessFailureAlert success={success} successMessage="Stock Operation Saved" />
     </Paper>
   );
 };
+
+const FormContainer = styled.div`
+  ${tw`flex flex-column`}
+`;

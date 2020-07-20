@@ -1,21 +1,7 @@
 import React from "react";
-import { Card, CardContent, Typography, makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    height: 135,
-    width: 185,
-  },
-  control: {
-    padding: theme.spacing(2),
-  },
-  pos: {
-    marginBottom: 12,
-  },
-}));
+import { Card, CardContent, Typography } from "@material-ui/core";
+import styled from "styled-components";
+import tw from "twin.macro";
 
 type TypographyColor =
   | "initial"
@@ -42,46 +28,40 @@ export const InfoCard = ({
   body,
   footer,
   footerColor,
-}: InfoCardProps) => {
-  const classes = useStyles();
-  return (
-    <Card
-      style={{ margin: "10px 10px 10px 10px" }}
-      className={classes.paper}
-      onClick={onClick}
-    >
-      <CardContent>
-        <Typography
-          style={{ fontSize: 14, overflow: "hidden", textOverflow: "ellipsis" }}
-          color="textSecondary"
-          gutterBottom
-        >
-          {header}
-        </Typography>
-        <Typography
-          style={{ fontSize: 14, overflow: "hidden", textOverflow: "ellipsis" }}
-          className={classes.pos}
-          color="textSecondary"
-          gutterBottom
-        >
-          {subHeader}
-        </Typography>
-        <Typography
-          variant="h5"
-          component="h2"
-          style={{ overflow: "hidden", textOverflow: "ellipsis" }}
-        >
-          {body}
-        </Typography>
-        <Typography
-          variant="body2"
-          component="p"
-          color={footerColor}
-          style={{ overflow: "hidden", textOverflow: "ellipsis" }}
-        >
-          {footer}
-        </Typography>
-      </CardContent>
-    </Card>
-  );
-};
+}: InfoCardProps) => (
+  <CardContainer onClick={onClick}>
+    <CardContent>
+      <MainCardText color="textSecondary" gutterBottom>
+        {header}
+      </MainCardText>
+      <SubCardText color="textSecondary" gutterBottom>
+        {subHeader}
+      </SubCardText>
+      <BaseCardText variant="h5" component="h2">
+        {body}
+      </BaseCardText>
+      <BaseCardText variant="body2" component="p" color={footerColor}>
+        {footer}
+      </BaseCardText>
+    </CardContent>
+  </CardContainer>
+);
+
+const CardContainer = styled(Card)`
+  ${tw`m-2`}
+  height: 135px;
+  width: 185px;
+`;
+
+// Fix these types later
+const BaseCardText = styled(Typography)<{ component?: any }>`
+  ${tw`overflow-hidden truncate`}
+`;
+
+const MainCardText = styled(BaseCardText)<{ component?: any }>`
+  ${tw`text-sm`}
+`;
+
+const SubCardText = styled(MainCardText)<{ component?: any }>`
+  ${tw`mb-3`}
+`;

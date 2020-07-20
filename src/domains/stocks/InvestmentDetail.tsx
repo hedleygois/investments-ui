@@ -8,6 +8,9 @@ import { fromNullable, map, filter } from "fp-ts/lib/Option";
 import { InfoCard } from "../../components/cards/InfoCard";
 import { differenceInDays, parseISO } from "date-fns";
 import { PriceVolumeChart } from "../../components/charts/PriceVolumeChart";
+import styled from "styled-components";
+import tw from "twin.macro";
+import { StyledH2 } from "../../components/header/Header";
 
 export const InvestmentDetails = () => {
   const [history, setHistory] = useState<Stock[]>([]);
@@ -79,12 +82,12 @@ export const InvestmentDetails = () => {
   return history.length > 0 ? (
     <Container>
       <Paper>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <h2>{history[0].symbol}</h2>
+        <HeaderContainer>
+          <StyledH2>{history[0].symbol}</StyledH2>
           <PriceVolumeChart history={history} />
-        </div>
+        </HeaderContainer>
       </Paper>
-      <div style={{ display: "flex" }}>
+      <BodyContainer>
         <InfoCard
           header="Price Variation"
           subHeader="(All Time)"
@@ -121,7 +124,15 @@ export const InvestmentDetails = () => {
           footer={`${percentageVariationWeek.toFixed(6)}%`}
           footerColor={absVariationWeek > 0 ? "primary" : "error"}
         />
-      </div>
+      </BodyContainer>
     </Container>
   ) : null;
 };
+
+const HeaderContainer = styled.div`
+  ${tw`flex flex-column`}
+`;
+
+const BodyContainer = styled.div`
+  ${tw`flex`}
+`;

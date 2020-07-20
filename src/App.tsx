@@ -22,7 +22,7 @@ function App() {
         </HeaderContainer>
         <Main data-testid="main">
           <Toolbar />
-          <div data-testid="data" style={{ width: "100%" }}>
+          <MainArea>
             <Switch>
               <Route path="/dashboard" exact component={InvestmentsOverview} />
               <Route
@@ -47,7 +47,7 @@ function App() {
 
               <Route path="/" exact component={InvestmentsOverview} />
             </Switch>
-          </div>
+          </MainArea>
         </Main>
       </HashRouter>
     </Container>
@@ -64,6 +64,10 @@ const HeaderContainer = styled.header`
 
 const Main = styled.div`
   ${tw`flex h-full`}
+`;
+
+const MainArea = styled.div`
+  ${tw`w-full`}
 `;
 
 export default App;

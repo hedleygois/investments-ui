@@ -4,12 +4,22 @@ import {
   listStockOperations,
   listFundsOperations,
 } from "../../api/OperationsApi";
+import styled from "styled-components";
+import tw from "twin.macro";
 
 export const OperationsOverview = () => (
-  <div style={{ display: "flex", flexDirection: "column", margin: "10px 10px 10px 10px" }}>
-    <div style={{ marginBottom: 30 }}>
+  <OverviewContainer>
+    <StocksContainer>
       <OperationsTable fetchData={listStockOperations} />
-    </div>
+    </StocksContainer>
     <OperationsTable fetchData={listFundsOperations} />
-  </div>
+  </OverviewContainer>
 );
+
+const OverviewContainer = styled.div`
+  ${tw`flex flex-column m-2`}
+`;
+
+const StocksContainer = styled.div`
+  ${tw`mb-4`}
+`;
