@@ -15,11 +15,18 @@ type MutationResponse<T> = {
   };
 };
 
+const BASE_URL =
+  process.env.REACT_APP_STAGE === "production"
+    ? "https://investments-server.herokuapp.com"
+    : "http://localhost:3001";
+
+const API_URL = `${BASE_URL}/query`;
+
 const queryDB = () => <T>({
   query,
   variables,
 }: QueryDB): Promise<QueryResponse<T>> => {
-  return fetch("http://localhost:3001/query", {
+  return fetch(API_URL, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -35,7 +42,7 @@ const mutateDB = () => <T>({
   query,
   variables,
 }: QueryDB): Promise<MutationResponse<T>> =>
-  fetch("http://localhost:3001/query", {
+  fetch(API_URL, {
     method: "POST",
     headers: {
       "content-type": "application/json",
