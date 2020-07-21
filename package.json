@@ -55,6 +55,8 @@
     "@types/react-router-dom": "5.1.4",
     "@types/react-virtualized": "9.21.10",
     "@types/recharts": "1.8.12",
-    "@types/styled-components": "5.1.1"
+    "@types/styled-components": "5.1.1",
+    "msw": "^0.19.5",
+    "whatwg-fetch": "^3.2.0"
   }
 }
