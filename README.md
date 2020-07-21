@@ -10,6 +10,7 @@ Repo to host UI part of my investments project.
 
 # Tech Debts
 
+* Handle errors more decently
 * Fix some typings
 * Use observable-hooks to deal with async calls
 * Make it more FP :)
