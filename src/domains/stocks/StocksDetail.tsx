@@ -50,7 +50,7 @@ export const StocksDetails = () => {
     history.reduce(
       (acc, el, idx, arr) => arr[arr.length - 1].price / arr[0].price,
       0
-    );
+    ) * 100;
 
   const absVariationMonth = pipe(
     filterByMonth(history),
@@ -95,7 +95,8 @@ export const StocksDetails = () => {
             history[history.length - 1].price - history[0].price
           ).toFixed(2)}`}
           footer={`${(
-            history[history.length - 1].price / history[0].price
+            (history[history.length - 1].price / history[0].price) *
+            100
           ).toFixed(6)}%`}
           footerColor={
             history[history.length - 1].price / history[0].price > 0
@@ -107,7 +108,7 @@ export const StocksDetails = () => {
           header="Price Variation"
           subHeader="(6 Months)"
           body={`R$${absVariation6Month.toFixed(2)}`}
-          footer={`${absVariation6Month.toFixed(6)}%`}
+          footer={`${percentage6Month.toFixed(6)}%`}
           footerColor={absVariation6Month > 0 ? "primary" : "error"}
         />
         <InfoCard

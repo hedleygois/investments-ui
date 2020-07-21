@@ -29,7 +29,7 @@ export const InfoCard = ({
   footer,
   footerColor,
 }: InfoCardProps) => (
-  <CardContainer onClick={onClick}>
+  <CardContainer onClick={onClick} data-testid={`info-card-${header}`}>
     <CardContent>
       <MainCardText color="textSecondary" gutterBottom>
         {header}

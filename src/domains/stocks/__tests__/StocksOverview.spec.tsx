@@ -40,4 +40,13 @@ describe("StocksOverview", () => {
       )
     ).toBeInTheDocument();
   });
+
+  it("renders a spinner when loading", () => {
+    render(
+      <MemoryRouter>
+        <StocksOverview />
+      </MemoryRouter>
+    );
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+  });
 });
