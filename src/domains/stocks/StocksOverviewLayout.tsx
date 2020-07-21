@@ -19,10 +19,16 @@ const getContainer = (children: React.ReactNode) => (active?: boolean) =>
     <InactiveOverviewContainer>{children}</InactiveOverviewContainer>
   );
 
-const getBody = (header: string, stocks: Map<string, Stock>) => (
+const getBody = (
+  header: string,
+  stocks: Map<string, LastStocksValuesResponse>
+) => (
   <>
     <StyledH3>{header}</StyledH3>
-    <StocksOverviewGrid stocks={stocks} />
+    {/* Material-ui does not propagate this prop */}
+    <div data-testid={`stocks-overview-grid-${header}`}>
+      <StocksOverviewGrid stocks={stocks} />
+    </div>
   </>
 );
 
@@ -30,8 +36,7 @@ export const StocksOverviewLayout = ({
   header,
   stocks,
   active,
-}: StocksOverviewLayoutProps) =>
-  getContainer(getBody(header, stocks))(active);
+}: StocksOverviewLayoutProps) => getContainer(getBody(header, stocks))(active);
 
 const ActiveOverviewContainer = styled.div`
   ${tw`bg-blue-50 mx-3`}

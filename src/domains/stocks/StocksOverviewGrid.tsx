@@ -5,11 +5,11 @@ import { LastStocksValuesResponse } from "../../api/StocksApi";
 import { InfoCard } from "../../components/cards/InfoCard";
 import { DataGrid } from "../../components/data-grid/DataGrid";
 
-type StocksOverviewGridProps = { stocks: Map<string, LastStocksValuesResponse> };
+type StocksOverviewGridProps = {
+  stocks: Map<string, LastStocksValuesResponse>;
+};
 
-export const StocksOverviewGrid = ({
-  stocks,
-}: StocksOverviewGridProps) => {
+export const StocksOverviewGrid = ({ stocks }: StocksOverviewGridProps) => {
   const history = useHistory();
 
   return (
