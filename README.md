@@ -23,6 +23,6 @@ Main used technologies:
 * Handle errors more decently - Hasura errors are *not* being handled at the moment just plain fetch rejections (check investments-cron for it)
 * Fix some typings. - Wrapping some Material-ui components on styled-components messes with the typings so now I'm using a plain *any*
 * Use observable-hooks/rxjs to deal with async calls - Some calls might fail and would be nice to retry them and rxjs can handle it with a single line with `stream.pipe(map(...), retry()/retryWhen()`
-* Play with some libs like Recoil/Koa or maybe just using Redux/ReduxToolkit
+* Play with some libs like Recoil/Koa or maybe just using Redux/ReduxToolkit/redux-observable
 * Apollo client if things get more complex
 
