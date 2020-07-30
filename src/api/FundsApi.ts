@@ -1,5 +1,10 @@
 import { FundWithValue } from "../model/Fund";
-import { MutateDB, QueryDB } from "./Api";
+import { MutateDB, QueryDB, queryDBFP, mutateDBFP } from "./Api";
+import { pipe } from "fp-ts/lib/pipeable";
+import { fold as foldTE } from "fp-ts/lib/TaskEither";
+import { fold as foldE } from "fp-ts/lib/Either";
+import { of as ofT, map as mapT } from "fp-ts/lib/Task";
+import { fromNullable, Option } from "fp-ts/lib/Option";
 
 export const QUERY_ALL_FUNDS = `
   query AllFunds {
@@ -52,6 +57,12 @@ export const MUTATION_BUY_SELL_FUND = `
   }
 `;
 
+export const fetchAllFundsWithLastValueFP = (): Promise<FundWithValue[]> =>
+  queryDBFP()<FundWithValue[]>({
+    query: QUERY_ALL_FUNDS_WITH_LAST_VALUES,
+    emptyInitializer: () => [],
+  })();
+
 export const fetchAllFundsWithLastValue = (): Promise<FundWithValue[]> => {
   return QueryDB<FundWithValue[]>({
     query: QUERY_ALL_FUNDS_WITH_LAST_VALUES,
@@ -78,7 +89,7 @@ export const fetchAllFunds = (): Promise<AllFundsResponse[]> =>
       return [];
     });
 
-type BuySellFund = {
+export type BuySellFund = {
   value: number;
 };
 
@@ -101,7 +112,21 @@ export const fetchFundByIdWithValue = (
       return undefined;
     });
 
-type BuySellFundResponse = {
+export const fetchFundByIdWithValueFP = (
+  fundId: number
+): Promise<Option<FundByIdWithValueResponse>> =>
+  pipe(
+    queryDBFP()<FundByIdWithValueResponse[]>({
+      query: QUERY_FUND_BY_ID_WITH_VALUES,
+      variables: {
+        fundId,
+      },
+      emptyInitializer: () => [],
+    }),
+    mapT((value) => fromNullable(value[0]))
+  )();
+
+export type BuySellFundResponse = {
   value: number;
 };
 
@@ -121,3 +146,15 @@ export const buySellFund = (
       console.error(e);
       return undefined;
     });
+
+export const buySellFundFP = (
+  fundId: number,
+  value: number
+): Promise<Option<BuySellFund>> =>
+  mutateDBFP()({
+    query: MUTATION_BUY_SELL_FUND,
+    variables: {
+      fundId,
+      value,
+    },
+  });

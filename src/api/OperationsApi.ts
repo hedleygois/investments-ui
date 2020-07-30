@@ -68,6 +68,7 @@ export const QUERY_BUY_SELL_FUND = `
     insert_FundsOperations(objects:{ value: $value, fund_id: $fundId, operation_type: $operationType}) {
       returning {
         id,
+        value,
         __typename
       }
     }
@@ -129,8 +130,8 @@ export const operateFund = (
   fundId: number,
   value: number,
   type: OperationType
-): Promise<number> => {
-  return MutateDB<number>({
+): Promise<FundsOperation | undefined> => {
+  return MutateDB<FundsOperation>({
     query: QUERY_BUY_SELL_FUND,
     variables: {
       value,
@@ -141,7 +142,27 @@ export const operateFund = (
     .then((res) => res.data.insert_FundsOperations.returning[0])
     .catch((e) => {
       console.error(e);
-      return -1;
+      return undefined;
+    });
+};
+
+export const operateFundFP = (
+  fundId: number,
+  value: number,
+  type: OperationType
+): Promise<FundsOperation | undefined> => {
+  return MutateDB<FundsOperation>({
+    query: QUERY_BUY_SELL_FUND,
+    variables: {
+      value,
+      fundId,
+      operationType: type.valueOf() + 1,
+    },
+  })
+    .then((res) => res.data.insert_FundsOperations.returning[0])
+    .catch((e) => {
+      console.error(e);
+      return undefined;
     });
 };
 

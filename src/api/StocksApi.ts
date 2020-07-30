@@ -119,7 +119,7 @@ export const fetchStocks = ({
     .then((res) => {
       const stocks = res.data.Stock;
       return stocks.reduce(
-        (map, el) => map.set(el.symbol, el),
+        (map, el) => map.set(el.symbol!, el),
         new Map<string, Stock>()
       );
     })

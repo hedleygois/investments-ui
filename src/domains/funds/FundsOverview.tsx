@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FundWithValue } from "../../model/Fund";
-import { fetchAllFundsWithLastValue } from "../../api/FundsApi";
+import { fetchAllFundsWithLastValue, fetchAllFundsWithLastValueFP } from "../../api/FundsApi";
 import { CircularProgress, Grid } from "@material-ui/core";
 import { DataGrid } from "../../components/data-grid/DataGrid";
 import { InfoCard } from "../../components/cards/InfoCard";
@@ -11,7 +11,8 @@ export const FundsOverview = () => {
   const [funds, setFunds] = useState<FundWithValue[] | undefined>(undefined);
 
   useEffect(() => {
-    fetchAllFundsWithLastValue().then(setFunds);
+    fetchAllFundsWithLastValueFP().then(setFunds);
+    // fetchAllFundsWithLastValue().then(setFunds);
   }, []);
 
   return !funds ? (

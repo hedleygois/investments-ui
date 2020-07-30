@@ -31,7 +31,7 @@ export const StocksDetails = () => {
 
   const filterHistoryByPeriod = (days: number) => (history: Stock[]) =>
     history.filter(
-      (stock) => differenceInDays(new Date(), parseISO(stock.latest)) <= days
+      (stock) => differenceInDays(new Date(), parseISO(stock.latest!)) <= days
     );
 
   const filterByMonth = filterHistoryByPeriod(30);
@@ -41,14 +41,14 @@ export const StocksDetails = () => {
   const calculateAbsVariationPeriod = (history: Stock[]) =>
     // horribly slow way of doing this
     history.reduce(
-      (acc, el, idx, arr) => arr[arr.length - 1].price - arr[0].price,
+      (acc, el, idx, arr) => arr[arr.length - 1].price! - arr[0].price!,
       0
     );
 
   const calculatePercentVariationPeriod = (history: Stock[]) =>
     // horribly slow way of doing this
     history.reduce(
-      (acc, el, idx, arr) => arr[arr.length - 1].price / arr[0].price,
+      (acc, el, idx, arr) => arr[arr.length - 1].price! / arr[0].price!,
       0
     ) * 100;
 
@@ -92,14 +92,14 @@ export const StocksDetails = () => {
           header="Price Variation"
           subHeader="(All Time)"
           body={`R$${(
-            history[history.length - 1].price - history[0].price
+            history[history.length - 1].price! - history[0].price!
           ).toFixed(2)}`}
           footer={`${(
-            (history[history.length - 1].price / history[0].price) *
+            (history[history.length - 1].price! / history[0].price!) *
             100
           ).toFixed(6)}%`}
           footerColor={
-            history[history.length - 1].price / history[0].price > 0
+            history[history.length - 1].price! / history[0].price! > 0
               ? "primary"
               : "error"
           }

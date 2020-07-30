@@ -7,7 +7,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { operateFund } from "../../service/OperationService";
+import { operateFund, operateFundFP } from "../../service/OperationService";
 import { SuccessFailureAlert } from "../../components/alert/SuccessFalureAlert";
 import { FormButtons } from "../../components/form-button/FormButtons";
 import { FormOperationLayout } from "./FormOperationLayout";
@@ -62,15 +62,22 @@ export const NewFundsOperations = () => {
         />
       </div>
       <FormButtons
-        onSuccessClick={() =>
-          operateFund({
-            fundId: funds.find((f) => f.name === fund)?.id,
-            valueToOperate: value,
-            operation,
-          })
-            .then(() => setSuccess(true))
-            .catch(() => setSuccess(false))
-        }
+        onSuccessClick={() => {
+          const fundId = funds.find((f) => f.name === fund)?.id;
+          if (fundId) {
+            return operateFundFP({
+              fundId,
+              valueToOperate: value,
+              operation,
+            })
+              .then((value) =>
+                value instanceof Error ? setSuccess(false) : setSuccess(true)
+              )
+              .catch(() => setSuccess(false)); // this should never happen but always catch it
+          }
+          // This should never happen
+          setSuccess(false);
+        }}
         onCancelClick={() => history.push("/dashboard")}
       />
       <SuccessFailureAlert
